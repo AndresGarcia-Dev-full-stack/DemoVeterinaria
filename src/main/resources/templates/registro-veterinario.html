@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Veterinario | Clínica Veterinaria</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        *{box-sizing:border-box}
+        body{margin:0;font-family:'Poppins',Arial,sans-serif;background:linear-gradient(135deg,#e8f5e9,#e3f2fd);min-height:100vh;color:#263238}
+        .container{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:35px 16px}
+        .card{width:100%;max-width:820px;background:#fff;border-radius:26px;padding:38px;box-shadow:0 18px 50px rgba(46,139,87,.18)}
+        .logo{width:78px;height:78px;margin:0 auto 12px;border-radius:50%;background:#e8f5e9;color:#2e8b57;display:flex;justify-content:center;align-items:center;font-size:38px}
+        h1{text-align:center;color:#2e8b57;margin:0;font-size:30px;font-weight:700}
+        .subtitle{text-align:center;color:#6b7280;margin:8px 0 28px;font-size:15px}
+        .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+        .form-group{display:flex;flex-direction:column}.full{grid-column:1/-1}
+        label{font-size:14px;font-weight:600;margin-bottom:7px;color:#374151}
+        input,select,textarea{width:100%;border:1.8px solid #d7e6dc;border-radius:14px;padding:0 15px;font-family:'Poppins',Arial,sans-serif;font-size:14px;outline:none;background:#fbfefc;transition:.2s ease}
+        input,select{height:52px} textarea{min-height:105px;padding-top:14px;resize:vertical}
+        input:focus,select:focus,textarea:focus{border-color:#2e8b57;background:#fff;box-shadow:0 0 0 4px rgba(46,139,87,.12)}
+        small{margin-top:6px;color:#6b7280;font-size:12px}
+        .btn-primary{width:100%;height:54px;border:none;margin-top:24px;border-radius:15px;background:linear-gradient(135deg,#2e8b57,#58c878);color:white;font-family:'Poppins',Arial,sans-serif;font-size:16px;font-weight:700;cursor:pointer}
+        .btn-secondary{display:block;text-align:center;margin-top:14px;padding:14px;border-radius:15px;background:#e8f5e9;color:#2e8b57;text-decoration:none;font-weight:600}
+        .alert{padding:13px;border-radius:14px;margin-bottom:18px;text-align:center;font-size:14px}.error{background:#fdecea;color:#b42318}
+        @media(max-width:700px){.card{padding:28px 20px}.grid{grid-template-columns:1fr}.full{grid-column:auto}h1{font-size:26px}}
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="card">
+        <div class="logo">🩺</div>
+        <h1>Solicitud Veterinario</h1>
+        <p class="subtitle">Completa tus datos para que el administrador revise tu solicitud</p>
+
+        <div th:if="${error}" class="alert error" th:text="${error}"></div>
+
+        <form action="/registro-veterinario" method="post">
+            <div class="grid">
+                <div class="form-group">
+                    <label>Nombres</label>
+                    <input name="nombres" placeholder="Ej: Laura" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Apellidos</label>
+                    <input name="apellidos" placeholder="Ej: Rodríguez" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de documento</label>
+                    <select name="tipoDocumento" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="CC">Cédula de ciudadanía</option>
+                        <option value="CE">Cédula de extranjería</option>
+                        <option value="PASAPORTE">Pasaporte</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Número de documento</label>
+                    <input name="numeroDocumento" placeholder="Número de documento" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Correo electrónico</label>
+                    <input type="email" name="correo" placeholder="tu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input name="telefono" placeholder="3000000000" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Especialidad</label>
+                    <input name="especialidad" placeholder="Ej: Medicina general" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Tarjeta profesional</label>
+                    <input name="tarjetaProfesional" placeholder="Número de tarjeta profesional" required>
+                </div>
+
+                <div class="form-group full">
+                    <label>Experiencia profesional</label>
+                    <textarea name="experiencia" placeholder="Describe brevemente tu experiencia" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="password" placeholder="Crea una contraseña" required
+                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$">
+                    <small>Mínimo 8 caracteres, mayúscula, minúscula, número y símbolo.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirmar contraseña</label>
+                    <input type="password" name="confirmarPassword" placeholder="Repite tu contraseña" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Enviar solicitud</button>
+            <a href="/login" class="btn-secondary">Volver al login</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Historial Clínico</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+
+            background:#dfe9e6;
+
+            min-height:100vh;
+
+            padding:40px;
+        }
+
+        .container{
+
+            max-width:1100px;
+
+            margin:auto;
+        }
+
+        .header{
+
+            background:#f5f5f5;
+
+            padding:30px;
+
+            border-radius:25px;
+
+            margin-bottom:30px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .title{
+
+            font-size:34px;
+
+            color:#2f855a;
+
+            font-weight:bold;
+        }
+
+        .subtitle{
+
+            margin-top:10px;
+
+            color:#555;
+        }
+
+        .card{
+
+            background:#f5f5f5;
+
+            padding:30px;
+
+            border-radius:25px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+            margin-bottom:30px;
+        }
+
+        .form-group{
+
+            margin-bottom:20px;
+        }
+
+        label{
+
+            display:block;
+
+            margin-bottom:8px;
+
+            font-weight:bold;
+        }
+
+        input,
+        select,
+        textarea{
+
+            width:100%;
+
+            padding:14px;
+
+            border:none;
+
+            border-radius:12px;
+
+            background:#dbe4ee;
+
+            font-size:15px;
+        }
+
+        textarea{
+
+            min-height:120px;
+
+            resize:vertical;
+        }
+
+        .btn{
+
+            background:#2f855a;
+
+            color:white;
+
+            border:none;
+
+            padding:14px 20px;
+
+            border-radius:12px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+        }
+
+        .btn:hover{
+
+            background:#276749;
+        }
+
+        table{
+
+            width:100%;
+
+            border-collapse:collapse;
+        }
+
+        th{
+
+            background:#2f855a;
+
+            color:white;
+
+            padding:16px;
+        }
+
+        td{
+
+            background:white;
+
+            padding:16px;
+
+            border-bottom:1px solid #ddd;
+
+            text-align:center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="title">
+            🩺 Historial Clínico
+        </div>
+
+        <div class="subtitle">
+            Registro de servicios médicos veterinarios
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <form action="/historial/guardar"
+              method="post">
+
+            <input type="hidden"
+                   name="mascotaId"
+                   th:value="${mascotaId}">
+
+            <div class="form-group">
+
+                <label>Tipo de servicio</label>
+
+                <select name="tipo">
+
+                    <option value="CONSULTA">
+                        Consulta
+                    </option>
+
+                    <option value="VACUNA">
+                        Vacuna
+                    </option>
+
+                    <option value="MEDICAMENTO">
+                        Medicamento
+                    </option>
+
+                    <option value="CIRUGIA">
+                        Cirugía
+                    </option>
+
+                    <option value="BAÑO">
+                        Baño
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Descripción</label>
+
+                <textarea name="descripcion"
+                          required></textarea>
+
+            </div>
+
+            <button type="submit"
+                    class="btn">
+
+                Guardar Registro
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <table>
+
+            <tr>
+
+                <th>Fecha</th>
+
+                <th>Tipo</th>
+
+                <th>Descripción</th>
+
+            </tr>
+
+            <tr th:each="item : ${historial}">
+
+                <td th:text="${item.fecha}"></td>
+
+                <td th:text="${item.tipo}"></td>
+
+                <td th:text="${item.descripcion}"></td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

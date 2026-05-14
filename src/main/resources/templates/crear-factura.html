@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generar Factura</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#dfe9e6;
+            padding:30px;
+        }
+
+        .card{
+            width:500px;
+            background:#f5f5f5;
+            padding:40px;
+            border-radius:25px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .logo{
+            text-align:center;
+            font-size:22px;
+            color:#2f855a;
+            margin-bottom:10px;
+            font-weight:bold;
+        }
+
+        .subtitle{
+            text-align:center;
+            margin-bottom:30px;
+            color:#444;
+        }
+
+        .form-group{
+            margin-bottom:18px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+            color:#333;
+        }
+
+        input{
+            width:100%;
+            height:48px;
+            border:none;
+            border-radius:12px;
+            padding:0 15px;
+            background:#dbe4ee;
+            font-size:15px;
+        }
+
+        input:focus{
+            outline:none;
+            border:2px solid #2f855a;
+        }
+
+        .btn{
+            width:100%;
+            height:50px;
+            border:none;
+            border-radius:14px;
+            background:#2f855a;
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            margin-top:15px;
+        }
+
+        .btn:hover{
+            background:#276749;
+        }
+
+        .volver{
+            display:block;
+            text-align:center;
+            margin-top:18px;
+            text-decoration:none;
+            color:#2f855a;
+            font-weight:bold;
+        }
+
+        .mensaje{
+    background:#d1fae5;
+    color:#065f46;
+    padding:14px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:bold;
+    margin-top:20px;
+}
+    </style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">
+        🧾 Generar Factura
+    </div>
+
+    <div class="subtitle">
+        Registro de cobro de servicios veterinarios
+    </div>
+
+    <form action="/facturas/guardar" method="post">
+
+        <div class="form-group">
+            <label>Documento Cliente</label>
+            <input type="text"
+                   name="documentoCliente"
+                   placeholder="Documento del cliente"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Cliente</label>
+            <input type="text"
+                   name="cliente"
+                   placeholder="Nombre del cliente"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Mascota</label>
+            <input type="text"
+                   name="mascota"
+                   placeholder="Nombre de la mascota"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Servicio</label>
+            <input type="text"
+                   name="servicio"
+                   placeholder="Ej: Vacunación"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Cantidad</label>
+            <input type="number"
+                   name="cantidad"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Valor</label>
+            <input type="number"
+                   step="0.01"
+                   name="valor"
+                   placeholder="Ej: 50000"
+                   required>
+        </div>
+
+        <button type="submit" class="btn">
+            Generar Factura
+        </button>
+
+        <div th:if="${mensaje}" class="mensaje">
+            <span th:text="${mensaje}"></span>
+        </div>
+
+    </form>
+
+    <a href="/facturas/listar" class="volver">
+        Ver facturas generadas
+    </a>
+
+    <a href="/veterinario/inicio" class="volver">
+        ← Volver al Panel Veterinario
+    </a>
+
+</div>
+
+</body>
+</html>

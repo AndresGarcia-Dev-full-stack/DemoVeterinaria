@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Tarifas Servicios</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+
+            background:#dfe9e6;
+
+            min-height:100vh;
+
+            padding:40px;
+        }
+
+        .container{
+
+            max-width:1100px;
+
+            margin:auto;
+        }
+
+        .header{
+
+            background:#f5f5f5;
+
+            border-radius:25px;
+
+            padding:35px;
+
+            margin-bottom:30px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .title{
+
+            font-size:36px;
+
+            color:#2f855a;
+
+            font-weight:bold;
+        }
+
+        .card{
+
+            background:#f5f5f5;
+
+            border-radius:25px;
+
+            padding:30px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .form-group{
+
+            margin-bottom:20px;
+        }
+
+        label{
+
+            display:block;
+
+            margin-bottom:8px;
+
+            font-weight:bold;
+        }
+
+        input{
+
+            width:100%;
+
+            padding:15px;
+
+            border:none;
+
+            border-radius:12px;
+
+            background:#dbe4ee;
+        }
+
+        .btn{
+
+            background:#2f855a;
+
+            color:white;
+
+            border:none;
+
+            padding:14px 20px;
+
+            border-radius:12px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+        }
+
+        table{
+
+            width:100%;
+
+            border-collapse:collapse;
+
+            margin-top:30px;
+        }
+
+        th{
+
+            background:#dce8de;
+
+            color:#2f855a;
+
+            padding:16px;
+        }
+
+        td{
+
+            background:white;
+
+            padding:16px;
+
+            border-bottom:1px solid #ddd;
+
+            text-align:center;
+        }
+
+        .btn-volver{
+
+            display:inline-block;
+
+            margin-top:25px;
+
+            text-decoration:none;
+
+            background:#2f855a;
+
+            color:white;
+
+            padding:14px 20px;
+
+            border-radius:12px;
+
+            font-weight:bold;
+        }
+
+        .btn-volver:hover{
+
+            background:#276749;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="title">
+            💰 Tarifas de Servicios
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <form action="/admin/tarifas/guardar"
+              method="post">
+
+            <div class="form-group">
+
+                <label>Servicio</label>
+
+                <input type="text"
+                       name="nombre"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Tarifa</label>
+
+                <input type="number"
+                       step="0.01"
+                       name="tarifa"
+                       required>
+
+            </div>
+
+            <a href="/admin/solicitudes-veterinarios"
+               class="btn-volver">
+
+                ← Volver al Panel
+
+            </a>
+
+            <button type="submit"
+                    class="btn">
+
+                Guardar Tarifa
+
+            </button>
+
+
+        </form>
+
+
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Servicio</th>
+
+                <th>Tarifa</th>
+
+            </tr>
+
+            <tr th:each="s : ${servicios}">
+
+                <td th:text="${s.id}"></td>
+
+                <td th:text="${s.nombre}"></td>
+
+                <td>
+
+                    $
+                    <span th:text="${s.tarifa}"></span>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

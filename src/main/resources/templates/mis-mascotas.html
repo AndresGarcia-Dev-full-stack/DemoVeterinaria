@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mis Mascotas</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Poppins,sans-serif;
+      background:linear-gradient(135deg,#e8f5e9,#e3f2fd);
+    }
+
+    .container{
+      padding:35px;
+    }
+
+    .card{
+      background:white;
+      border-radius:25px;
+      padding:30px;
+      box-shadow:0 18px 50px rgba(46,139,87,.15);
+    }
+
+    h1{
+      color:#2e8b57;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:20px;
+    }
+
+    th{
+      background:#e8f5e9;
+      color:#2e8b57;
+      padding:14px;
+      text-align:left;
+    }
+
+    td{
+      padding:14px;
+      border-bottom:1px solid #eee;
+    }
+
+    tr:hover{
+      background:#fafdfb;
+    }
+
+    .empty{
+      text-align:center;
+      color:#6b7280;
+      padding:30px;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:20px;
+      padding:12px 18px;
+      border-radius:14px;
+      background:#2e8b57;
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="card">
+
+    <h1>Mis Mascotas</h1>
+
+    <table>
+
+      <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Especie</th>
+        <th>Raza</th>
+        <th>Edad</th>
+        <th>Peso</th>
+        <th>Sexo</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr th:each="m : ${mascotas}">
+        <td th:text="${m.nombre}"></td>
+        <td th:text="${m.especie}"></td>
+        <td th:text="${m.raza}"></td>
+        <td th:text="${m.edad}"></td>
+        <td th:text="${m.peso} + ' kg'"></td>
+        <td th:text="${m.sexo}"></td>
+      </tr>
+
+      <tr th:if="${#lists.isEmpty(mascotas)}">
+        <td colspan="6" class="empty">
+          No hay mascotas registradas
+        </td>
+      </tr>
+
+      </tbody>
+
+    </table>
+
+    <a href="/cliente/inicio" class="btn">
+      Volver al menú
+    </a>
+
+  </div>
+
+</div>
+
+</body>
+</html>

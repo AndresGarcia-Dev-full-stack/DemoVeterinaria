@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Clínica Veterinaria</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            width: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #2e8b57;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #2e8b57;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+
+        <h1>🐾 Clínica Veterinaria</h1>
+        <p>Cuidado y amor para quienes amas</p>
+
+        <p th:if="${error}" class="error" th:text="${error}"></p>
+
+        <form action="/login" method="post">
+
+            <input type="email" name="correo" placeholder="Correo" required>
+
+            <input type="password" name="password" placeholder="Contraseña" required>
+
+            <!-- CAPTCHA SOLO SI FALLA 2 VECES -->
+            <div th:if="${mostrarCaptcha}">
+                <p id="captchaText"></p>
+
+                <input type="hidden" name="captcha" id="captcha">
+
+                <input type="number" name="captchaRespuesta" placeholder="Captcha" required>
+            </div>
+
+            <button type="submit">Iniciar sesión</button>
+        </form>
+
+        <a href="/registro-cliente">Crear cuenta</a>
+        <a href="/registro-veterinario">Soy veterinario</a>
+        <a href="/olvide-password">Olvidé contraseña</a>
+
+    </div>
+</div>
+
+<script>
+    const captchaInput = document.getElementById("captcha");
+
+    if (captchaInput) {
+        let a = Math.floor(Math.random()*10);
+        let b = Math.floor(Math.random()*10);
+
+        document.getElementById("captchaText").innerText = a + " + " + b;
+        captchaInput.value = a + b;
+    }
+</script>
+
+</body>
+</html>

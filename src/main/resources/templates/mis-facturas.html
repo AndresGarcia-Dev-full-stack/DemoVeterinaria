@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Facturas | Clínica Veterinaria</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            background:#dfe9e6;
+            min-height:100vh;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1100px;
+            margin:auto;
+        }
+
+        .header{
+            background:#f5f5f5;
+            border-radius:25px;
+            padding:30px;
+            margin-bottom:30px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .title{
+            color:#2f855a;
+            font-size:34px;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            color:#555;
+            font-size:16px;
+        }
+
+        .card{
+            background:#f5f5f5;
+            border-radius:25px;
+            padding:30px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .form-group{
+            margin-bottom:20px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+            color:#333;
+        }
+
+        input{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:12px;
+            background:#dbe4ee;
+            font-size:15px;
+        }
+
+        .btn{
+            display:inline-block;
+            margin-top:15px;
+            padding:14px 24px;
+            background:#2f855a;
+            color:white;
+            text-decoration:none;
+            border:none;
+            border-radius:14px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .btn:hover{
+            background:#276749;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:30px;
+        }
+
+        th{
+            background:#2f855a;
+            color:white;
+            padding:16px;
+            font-size:15px;
+        }
+
+        td{
+            padding:16px;
+            border-bottom:1px solid #ddd;
+            text-align:center;
+            background:white;
+        }
+
+        tr:hover td{
+            background:#f1f8f4;
+        }
+
+        .empty{
+            text-align:center;
+            padding:30px;
+            color:#666;
+        }
+
+        .volver{
+            display:inline-block;
+            margin-top:25px;
+            padding:14px 24px;
+            background:#2f855a;
+            color:white;
+            text-decoration:none;
+            border-radius:14px;
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="title">
+            🧾 Mis Facturas
+        </div>
+
+        <div class="subtitle">
+            Consulta tus facturas por número de cédula
+        </div>
+    </div>
+
+    <div class="card">
+
+        <form action="/cliente/mis-facturas" method="get">
+
+            <div class="form-group">
+                <label>Número de cédula</label>
+                <input type="text"
+                       name="documentoCliente"
+                       placeholder="Ingrese su número de cédula"
+                       th:value="${documentoCliente}"
+                       required>
+            </div>
+
+            <button type="submit" class="btn">
+                Buscar Facturas
+            </button>
+
+        </form>
+
+        <table th:if="${facturas != null and not #lists.isEmpty(facturas)}">
+
+            <tr>
+                <th>N° Factura</th>
+                <th>Cliente</th>
+                <th>Documento</th>
+                <th>Mascota</th>
+                <th>Total</th>
+            </tr>
+
+            <tr th:each="factura : ${facturas}">
+
+                <td th:text="${factura.id}"></td>
+
+                <td th:text="${factura.cliente}"></td>
+
+                <td th:text="${factura.documentoCliente}"></td>
+
+                <td th:text="${factura.mascota}"></td>
+
+                <td>
+                    $
+                    <span th:text="${factura.total}"></span>
+                </td>
+
+            </tr>
+
+        </table>
+
+        <div class="empty"
+             th:if="${facturas != null and #lists.isEmpty(facturas)}">
+
+            No tienes facturas registradas con ese número de cédula.
+
+        </div>
+
+        <a href="/cliente/inicio" class="volver">
+            Volver al inicio
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

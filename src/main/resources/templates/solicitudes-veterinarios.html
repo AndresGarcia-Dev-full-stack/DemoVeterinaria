@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitudes Veterinarios | Clínica Veterinaria</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:'Poppins',Arial,sans-serif;
+            background:linear-gradient(135deg,#e8f5e9,#e3f2fd);
+            min-height:100vh;
+            color:#263238;
+        }
+
+        .container{
+            padding:36px;
+        }
+
+        .header{
+            background:#fff;
+            border-radius:24px;
+            padding:26px 30px;
+            box-shadow:0 18px 50px rgba(46,139,87,.15);
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:24px;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        h1{
+            color:#2e8b57;
+            margin:0;
+            font-size:30px;
+        }
+
+        .subtitle{
+            color:#6b7280;
+            margin:6px 0 0;
+            font-size:15px;
+        }
+
+        .acciones-admin{
+            display:flex;
+            gap:15px;
+            margin:20px 0;
+            flex-wrap:wrap;
+        }
+
+        .btn-admin{
+            text-decoration:none;
+            background:linear-gradient(135deg,#2e8b57,#38a169);
+            color:white;
+            padding:14px 22px;
+            border-radius:16px;
+            font-weight:600;
+            transition:all .25s ease;
+            box-shadow:0 8px 20px rgba(46,139,87,.20);
+            display:flex;
+            align-items:center;
+            gap:8px;
+            font-size:14px;
+        }
+
+        .btn-admin:hover{
+            background:linear-gradient(135deg,#276749,#2f855a);
+            transform:translateY(-3px);
+            box-shadow:0 12px 25px rgba(46,139,87,.28);
+        }
+
+        .btn-logout{
+            background:#e8f5e9;
+            color:#2e8b57;
+            text-decoration:none;
+            font-weight:700;
+            padding:13px 20px;
+            border-radius:14px;
+            transition:0.2s;
+        }
+
+        .btn-logout:hover{
+            background:#d7f2df;
+        }
+
+        .card{
+            background:#fff;
+            border-radius:24px;
+            padding:26px;
+            box-shadow:0 18px 50px rgba(46,139,87,.15);
+            overflow-x:auto;
+        }
+
+        .table-title{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:18px;
+        }
+
+        .table-title h2{
+            margin:0;
+            color:#2e8b57;
+            font-size:22px;
+        }
+
+        .table-title span{
+            font-size:28px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            min-width:900px;
+        }
+
+        th{
+            background:#e8f5e9;
+            color:#2e8b57;
+            padding:15px;
+            text-align:left;
+            font-size:14px;
+        }
+
+        td{
+            padding:15px;
+            border-bottom:1px solid #edf2f7;
+            font-size:14px;
+            color:#374151;
+        }
+
+        tr:hover td{
+            background:#fbfefc;
+        }
+
+        .actions{
+            display:flex;
+            gap:10px;
+        }
+
+        .actions form{
+            margin:0;
+        }
+
+        .btn-small{
+            border:none;
+            border-radius:12px;
+            padding:10px 14px;
+            font-family:'Poppins',Arial,sans-serif;
+            font-weight:700;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        .approve{
+            background:#2e8b57;
+            color:white;
+        }
+
+        .approve:hover{
+            background:#276749;
+            transform:translateY(-2px);
+        }
+
+        .reject{
+            background:#d92d20;
+            color:white;
+        }
+
+        .reject:hover{
+            background:#b42318;
+            transform:translateY(-2px);
+        }
+
+        .empty{
+            text-align:center;
+            color:#6b7280;
+            padding:28px;
+        }
+
+        @media(max-width:700px){
+
+            .container{
+                padding:18px;
+            }
+
+            .header{
+                flex-direction:column;
+                align-items:flex-start;
+                gap:16px;
+            }
+
+            h1{
+                font-size:25px;
+            }
+
+            .acciones-admin{
+                width:100%;
+                flex-direction:column;
+            }
+
+            .btn-admin{
+                width:100%;
+                justify-content:center;
+            }
+
+            .btn-logout{
+                width:100%;
+                text-align:center;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div>
+            <h1>Solicitudes de Veterinarios</h1>
+
+            <p class="subtitle">
+                Revisa, aprueba o rechaza registros pendientes.
+            </p>
+        </div>
+
+        <div class="acciones-admin">
+
+            <a href="/facturas/crear" class="btn-admin">
+                🧾 Generar Factura
+            </a>
+
+            <a href="/admin/tarifas" class="btn-admin">
+                💰 Tarifas
+            </a>
+
+        </div>
+
+        <a href="/login" class="btn-logout">
+            Cerrar sesión
+        </a>
+
+    </div>
+
+    <div class="card">
+
+        <div class="table-title">
+            <h2>Veterinarios pendientes</h2>
+            <span>🩺</span>
+        </div>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Documento</th>
+                <th>Correo</th>
+                <th>Especialidad</th>
+                <th>Tarjeta profesional</th>
+                <th>Experiencia</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="v : ${veterinarios}">
+
+                <td th:text="${v.nombres + ' ' + v.apellidos}"></td>
+
+                <td th:text="${v.numeroDocumento}"></td>
+
+                <td th:text="${v.correo}"></td>
+
+                <td th:text="${v.especialidad}"></td>
+
+                <td th:text="${v.tarjetaProfesional}"></td>
+
+                <td th:text="${v.experiencia}"></td>
+
+                <td class="actions">
+
+                    <form th:action="@{/admin/aprobar/{id}(id=${v.id})}" method="post">
+                        <button type="submit" class="btn-small approve">
+                            Aprobar
+                        </button>
+                    </form>
+
+                    <form th:action="@{/admin/rechazar/{id}(id=${v.id})}" method="post">
+                        <button type="submit" class="btn-small reject">
+                            Rechazar
+                        </button>
+                    </form>
+
+                </td>
+
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(veterinarios)}">
+                <td colspan="7" class="empty">
+                    No hay solicitudes pendientes.
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

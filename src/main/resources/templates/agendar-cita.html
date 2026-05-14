@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Agendar Cita</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+
+            background:#dfe9e6;
+
+            min-height:100vh;
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+        }
+
+        .card{
+
+            width:600px;
+
+            background:#f5f5f5;
+
+            padding:40px;
+
+            border-radius:25px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .title{
+
+            font-size:34px;
+
+            color:#2f855a;
+
+            font-weight:bold;
+
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+
+            color:#666;
+
+            margin-bottom:30px;
+        }
+
+        .form-group{
+
+            margin-bottom:20px;
+        }
+
+        label{
+
+            display:block;
+
+            margin-bottom:8px;
+
+            font-weight:bold;
+        }
+
+        input,
+        select{
+
+            width:100%;
+
+            padding:15px;
+
+            border:none;
+
+            border-radius:12px;
+
+            background:#dbe4ee;
+        }
+
+        .btn{
+
+            background:#2f855a;
+
+            color:white;
+
+            border:none;
+
+            padding:14px 20px;
+
+            border-radius:12px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+
+            width:100%;
+        }
+
+        .btn-volver{
+
+            display:block;
+
+            margin-top:20px;
+
+            text-align:center;
+
+            text-decoration:none;
+
+            color:#2f855a;
+
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="title">
+        📅 Agendar Cita
+    </div>
+
+    <div class="subtitle">
+        Solicita una cita veterinaria
+    </div>
+
+    <form action="/cliente/agendar-cita"
+          method="post">
+
+        <div class="form-group">
+
+            <label>Mascota</label>
+
+            <input type="text"
+                   name="mascota"
+                   placeholder="Nombre mascota">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Fecha</label>
+
+            <input type="date"
+                   name="fecha">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Hora</label>
+
+            <input type="time"
+                   name="hora">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Motivo</label>
+
+            <input type="text"
+                   name="motivo"
+                   placeholder="Motivo consulta">
+
+        </div>
+
+        <button type="submit"
+                class="btn">
+
+            Agendar
+
+        </button>
+
+    </form>
+
+    <a href="/cliente/inicio"
+       class="btn-volver">
+
+        ← Volver
+
+    </a>
+
+</div>
+
+</body>
+</html>

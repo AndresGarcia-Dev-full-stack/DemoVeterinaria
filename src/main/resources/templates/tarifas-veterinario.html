@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Tarifas Servicios</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            background:#dfe9e6;
+            min-height:100vh;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1100px;
+            margin:auto;
+        }
+
+        .header{
+            background:#f5f5f5;
+            border-radius:25px;
+            padding:35px;
+            margin-bottom:30px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .title{
+            font-size:36px;
+            color:#2f855a;
+            font-weight:bold;
+        }
+
+        .subtitle{
+            margin-top:10px;
+            color:#555;
+            font-size:15px;
+        }
+
+        .card{
+            background:#f5f5f5;
+            border-radius:25px;
+            padding:30px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:10px;
+        }
+
+        th{
+            background:#dce8de;
+            color:#2f855a;
+            padding:16px;
+        }
+
+        td{
+            background:white;
+            padding:16px;
+            border-bottom:1px solid #ddd;
+            text-align:center;
+        }
+
+        tr:hover td{
+            background:#f7faf8;
+        }
+
+        .btn-volver{
+            display:inline-block;
+            margin-top:25px;
+            text-decoration:none;
+            background:#2f855a;
+            color:white;
+            padding:14px 20px;
+            border-radius:12px;
+            font-weight:bold;
+            transition:.2s;
+        }
+
+        .btn-volver:hover{
+            background:#276749;
+            transform:translateY(-2px);
+        }
+
+        .empty{
+            text-align:center;
+            color:#777;
+            padding:25px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="title">
+            💰 Tarifas de Servicios
+        </div>
+
+        <div class="subtitle">
+            Consulta las tarifas configuradas por el administrador.
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Servicio</th>
+
+                <th>Tarifa</th>
+
+            </tr>
+
+            <tr th:each="s : ${servicios}">
+                <td th:text="${s.id}"></td>
+                <td th:text="${s.nombre}"></td>
+                <td>
+                    $
+                    <span th:text="${s.tarifa}"></span>
+                </td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(servicios)}">
+
+                <td colspan="3" class="empty">
+                    No hay tarifas registradas
+                </td>
+
+            </tr>
+
+        </table>
+
+        <a href="/veterinario/inicio"
+           class="btn-volver">
+
+            ← Volver al Panel
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
